@@ -6,25 +6,44 @@ import uitchecken.CentraalSysteem;
 import java.awt.*;
 
 public class KaartLezer {
-    public int lezerID;
-    public String locatie;
-    public CentraalSysteem systeem;
+
+    private int lezerID;
+    private String locatie;
+    private CentraalSysteem systeem;
+
+    public int getLezerID() {
+        return lezerID;
+    }
+
+    public String getLocatie() {
+        return locatie;
+    }
+
+    public void setLezerID(int lezerID) {
+        this.lezerID = lezerID;
+    }
+
+    public void setLocatie(String locatie) {
+        this.locatie = locatie;
+    }
+
+    public void setSysteem(CentraalSysteem systeem) {
+        this.systeem = systeem;
+    }
 
     public void scanKaart(AnoniemeKaart deKaart, UitcheckTransactie transactie) {
-        if (validSaldo(deKaart) && deKaart.isIngecheckt) {
+        if (validSaldo(deKaart) && deKaart.isIngecheckt()) {
             double prijs = transactie.berekenRitPrijs(transactie.beginStation);
             deKaart.updateSaldo(prijs);
             geefPiepje(2);
-            deKaart.isIngecheckt = false;
+            deKaart.setIncheckStatus(false);
             toonMelding("Uitgecheckt!");
-            systeem.registreerUitcheck(deKaart.kaartNummer, locatie);
-        }
-        else if (!deKaart.isIngecheckt && validSaldo(deKaart)) {
-            deKaart.isIngecheckt = true;
+            systeem.registreerUitcheck(deKaart.getKaartNummer(), locatie);
+        } else if (!deKaart.isIngecheckt() && validSaldo(deKaart)) {
+            deKaart.setIncheckStatus(true);
             toonMelding("Ingecheckt!");
             geefPiepje(2);
-        }
-        else {
+        } else {
             toonMelding("Niet Genoeg Saldo!");
         }
     }
@@ -44,8 +63,9 @@ public class KaartLezer {
     }
 
     public double checkSaldo(AnoniemeKaart deKaart) {
-            return deKaart.saldo;
+        return deKaart.getSaldo();
     }
+
     public boolean validSaldo(AnoniemeKaart deKaart) {
         if (checkSaldo(deKaart) >= systeem.instapTarief) {
             return true;

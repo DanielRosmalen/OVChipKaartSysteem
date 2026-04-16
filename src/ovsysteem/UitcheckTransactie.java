@@ -1,4 +1,4 @@
-package uitchecken;
+package ovsysteem;
 
 public class UitcheckTransactie {
     public String beginStation;
@@ -44,6 +44,10 @@ public class UitcheckTransactie {
                 break;
             case "Arnhem-Utrecht":
                 ritPrijs = 8.90;
+                break;
+            default:
+                ritPrijs = 0.0;
+                System.out.println("Incheck geanuleerd.");
                 break;
         }
         return ritPrijs;

@@ -1,7 +1,7 @@
 package uitchecken;
 
 public class Drive {
-    public static void main (String[] args) {
+    public static void main(String[] args) {
 
         KaartLezer ovPaalAms = new KaartLezer();
         KaartLezer ovPaalUtr = new KaartLezer();
@@ -15,29 +15,29 @@ public class Drive {
         centraalSyst.inSysteemOnline = true;
         centraalSyst.instapTarief = 4.00;
 
-        ovPaalAms.locatie = "Amsterdam";
-        ovPaalAms.lezerID = 1;
-        ovPaalAms.systeem = centraalSyst;
+        ovPaalAms.setLezerID(1);
+        ovPaalAms.setLocatie("Amsterdam");
+        ovPaalAms.setSysteem(centraalSyst);
 
-        ovPaalUtr.locatie = "Utrecht";
-        ovPaalUtr.lezerID = 2;
-        ovPaalUtr.systeem = centraalSyst;
+        ovPaalUtr.setLezerID(2);
+        ovPaalUtr.setLocatie("Utrecht");
+        ovPaalUtr.setSysteem(centraalSyst);
 
-        ovPaalArn.locatie = "Arnhem";
-        ovPaalArn.lezerID = 3;
-        ovPaalArn.systeem = centraalSyst;
+        ovPaalArn.setLezerID(3);
+        ovPaalArn.setLocatie("Arnhem");
+        ovPaalArn.setSysteem(centraalSyst);
 
-        ovPaalRot.locatie = "Rotterdam";
-        ovPaalRot.lezerID = 4;
-        ovPaalRot.systeem = centraalSyst;
+        ovPaalRot.setLezerID(4);
+        ovPaalRot.setLocatie("Rotterdam");
+        ovPaalRot.setSysteem(centraalSyst);
 
-        anoniemKaart.isIngecheckt  = true;
-        anoniemKaart.saldo = 30;
-        anoniemKaart.kaartNummer = 69420;
+        anoniemKaart.setIncheckStatus(true);
+        anoniemKaart.setSaldo(30);
+        anoniemKaart.setKaartNummer(69420);
 
         transactie.beginStation = "Amsterdam";
         transactie.eindStation = "Utrecht";
         ovPaalUtr.scanKaart(anoniemKaart, transactie);
-        System.out.println("Saldo na uitcheck: " + anoniemKaart.saldo);
+        System.out.println("Saldo na uitcheck: " + anoniemKaart.getSaldo());
     }
 }

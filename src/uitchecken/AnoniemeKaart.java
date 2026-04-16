@@ -2,9 +2,29 @@ package uitchecken;
 
 public class AnoniemeKaart {
 
-    public double saldo;
-    public boolean isIngecheckt;
-    public int kaartNummer;
+    private double saldo;
+    private boolean isIngecheckt;
+    private int kaartNummer;
+
+    public double getSaldo() {
+        return saldo;
+    }
+
+    public boolean isIngecheckt() {
+        return isIngecheckt;
+    }
+
+    public int getKaartNummer() {
+        return kaartNummer;
+    }
+
+    public void setSaldo(double saldo) {
+        this.saldo = saldo;
+    }
+
+    public void setKaartNummer(int kaartNummer) {
+        this.kaartNummer = kaartNummer;
+    }
 
     public void setIncheckStatus(boolean status) {
         isIngecheckt = status;
