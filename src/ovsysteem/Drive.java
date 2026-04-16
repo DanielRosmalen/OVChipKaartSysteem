@@ -50,10 +50,10 @@ public class Drive {
 
         // Aangrenzende stations per station (op basis van index)
         int[][] aangrenzend = {
-            {1, 3},    // Amsterdam → Utrecht, Rotterdam
-            {0, 2, 3}, // Utrecht → Amsterdam, Arnhem, Rotterdam
-            {1, 3},    // Arnhem → Utrecht, Rotterdam
-            {2, 0, 1}  // Rotterdam → Arnhem, Amsterdam, Utrecht
+            {1, 3},
+            {0, 2, 3},
+            {1, 3},
+            {2, 0, 1}
         };
 
         int stationIndex = 0;
