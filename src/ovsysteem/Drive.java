@@ -22,21 +22,21 @@ public class Drive {
         anoniemKaart.setSaldo(50.0);
         anoniemKaart.setKaartNummer(69420);
 
-        ovPaalAms.locatie = "Amsterdam";
-        ovPaalAms.lezerID = 1;
-        ovPaalAms.systeem = centraalSyst;
+        ovPaalAms.setLocatie("Amsterdam");
+        ovPaalAms.setLezerID(1);
+        ovPaalAms.setSysteem(centraalSyst);
 
-        ovPaalUtr.locatie = "Utrecht";
-        ovPaalUtr.lezerID = 2;
-        ovPaalUtr.systeem = centraalSyst;
+        ovPaalUtr.setLocatie("Utrecht");
+        ovPaalUtr.setLezerID(2);
+        ovPaalUtr.setSysteem(centraalSyst);
 
-        ovPaalArn.locatie = "Arnhem";
-        ovPaalArn.lezerID = 3;
-        ovPaalArn.systeem = centraalSyst;
+        ovPaalArn.setLocatie("Arnhem");
+        ovPaalArn.setLezerID(3);
+        ovPaalArn.setSysteem(centraalSyst);
 
-        ovPaalRot.locatie = "Rotterdam";
-        ovPaalRot.lezerID = 4;
-        ovPaalRot.systeem = centraalSyst;
+        ovPaalRot.setLocatie("Rotterdam");
+        ovPaalRot.setLezerID(4);
+        ovPaalRot.setSysteem(centraalSyst);
 
         betaalAutomaat.locatie = "Amsterdam";
         betaalAutomaat.automaatID = 1;
@@ -144,7 +144,7 @@ public class Drive {
                 }
             } else {
                 // Treinmenu
-                System.out.println("--- In de trein ---");
+                System.out.println("In de trein");
                 System.out.println("Saldo: " + anoniemKaart.getSaldo());
                 System.out.println("(1) Uitstappen op " + stations.get(volgendStation).locatie);
                 System.out.println("(2) Doorreizen");

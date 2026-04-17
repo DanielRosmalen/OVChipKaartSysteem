@@ -25,6 +25,10 @@ public class AnoniemeKaart {
     }
 
     public void verhoogSaldo(double bedrag) {
+        if (bedrag <= 0) {
+            System.out.println("Ongeldig bedrag. U kunt alleen een positief bedrag storten.");
+            return;
+        }
         saldo = saldo + bedrag;
     }
 }

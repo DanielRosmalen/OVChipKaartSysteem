@@ -3,9 +3,17 @@ package ovsysteem;
 import java.awt.*;
 
 public class KaartLezer {
-    public int lezerID;
-    public String locatie;
-    public CentraalSysteem systeem;
+    private int lezerID;
+    private String locatie;
+    private CentraalSysteem systeem;
+
+    public int getLezerID() { return lezerID; }
+    public String getLocatie() { return locatie; }
+    public CentraalSysteem getSysteem() { return systeem; }
+
+    public void setLezerID(int lezerID) { this.lezerID = lezerID; }
+    public void setLocatie(String locatie) { this.locatie = locatie; }
+    public void setSysteem(CentraalSysteem systeem) { this.systeem = systeem; }
 
     // Inchecken: scanKaart met alleen een kaart
     public void scanKaart(AnoniemeKaart deKaart) {
