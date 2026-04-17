@@ -9,12 +9,15 @@ public class Drive {
 
         AnoniemeKaart anoniemKaart = new AnoniemeKaart();
         CentraalSysteem centraalSyst = new CentraalSysteem();
-        BetaalAutomaat betaalAutomaat = new BetaalAutomaat();
-
         KaartLezer ovPaalAms = new KaartLezer();
         KaartLezer ovPaalUtr = new KaartLezer();
         KaartLezer ovPaalArn = new KaartLezer();
         KaartLezer ovPaalRot = new KaartLezer();
+
+        BetaalAutomaat automAms = new BetaalAutomaat();
+        BetaalAutomaat automUtr = new BetaalAutomaat();
+        BetaalAutomaat automArn = new BetaalAutomaat();
+        BetaalAutomaat automRot = new BetaalAutomaat();
 
         centraalSyst.inSysteemOnline = true;
         centraalSyst.instapTarief = 5.0;
@@ -38,9 +41,27 @@ public class Drive {
         ovPaalRot.setLezerID(4);
         ovPaalRot.setSysteem(centraalSyst);
 
-        betaalAutomaat.locatie = "Amsterdam";
-        betaalAutomaat.automaatID = 1;
-        betaalAutomaat.systeem = centraalSyst;
+        automAms.locatie = "Amsterdam";
+        automAms.automaatID = 1;
+        automAms.systeem = centraalSyst;
+
+        automUtr.locatie = "Utrecht";
+        automUtr.automaatID = 2;
+        automUtr.systeem = centraalSyst;
+
+        automArn.locatie = "Arnhem";
+        automArn.automaatID = 3;
+        automArn.systeem = centraalSyst;
+
+        automRot.locatie = "Rotterdam";
+        automRot.automaatID = 4;
+        automRot.systeem = centraalSyst;
+
+        ArrayList<BetaalAutomaat> automaten = new ArrayList<>();
+        automaten.add(automAms); // index 0
+        automaten.add(automUtr); // index 1
+        automaten.add(automArn); // index 2
+        automaten.add(automRot); // index 3
 
         ArrayList<KaartLezer> stations = new ArrayList<>();
         stations.add(ovPaalAms); // index 0
@@ -61,12 +82,13 @@ public class Drive {
         boolean inDeTrein = false;
         boolean doorgaan = true;
 
-        System.out.println("Welkom je bevindt je op station " + stations.get(stationIndex).locatie + ".");
+        System.out.println("Welkom je bevindt je op station " + stations.get(stationIndex).getLocatie() + ".");
 
         while (doorgaan) {
             if (!inDeTrein) {
                 // Stationsmenu
                 KaartLezer huidigePaal = stations.get(stationIndex);
+                BetaalAutomaat huidigeAutomaat = automaten.get(stationIndex);
                 System.out.println("Saldo: " + anoniemKaart.getSaldo());
                 System.out.println("(1) Inchecken");
                 System.out.println("(2) Uitchecken");
@@ -86,13 +108,13 @@ public class Drive {
                             int[] buren = aangrenzend[stationIndex];
                             System.out.println("Naar welk station wil je reizen?");
                             for (int i = 0; i < buren.length; i++) {
-                                System.out.println("(" + (i + 1) + ") " + stations.get(buren[i]).locatie);
+                                System.out.println("(" + (i + 1) + ") " + stations.get(buren[i]).getLocatie());
                             }
                             System.out.print("Keuze: ");
                             int pick = Integer.parseInt(scanner.nextLine()) - 1;
                             volgendStation = buren[pick];
                             inDeTrein = true;
-                            System.out.println("Je reist naar " + stations.get(volgendStation).locatie + ".");
+                            System.out.println("Je reist naar " + stations.get(volgendStation).getLocatie() + ".");
                         }
                     }
                 } else if (keuze.equals("2")) {
@@ -120,8 +142,8 @@ public class Drive {
                     centraalSyst.verwerkWebsiteBestelling(opTransactie);
                     System.out.println("Bestelling van " + bedrag + " geplaatst! Haal deze op bij een automaat.");
                 } else if (keuze.equals("5")) {
-                    if (betaalAutomaat.haalOnlineBestellingOp() != null) {
-                        OpwaardeerTransactie opgehaald = betaalAutomaat.haalOnlineBestellingOp();
+                    if (huidigeAutomaat.haalOnlineBestellingOp() != null) {
+                        OpwaardeerTransactie opgehaald = huidigeAutomaat.haalOnlineBestellingOp();
                         anoniemKaart.verhoogSaldo(opgehaald.bedrag);
                         centraalSyst.bestelling = null;
                         centraalSyst.openstaandeBestellingen--;
@@ -146,7 +168,7 @@ public class Drive {
                 // Treinmenu
                 System.out.println("In de trein");
                 System.out.println("Saldo: " + anoniemKaart.getSaldo());
-                System.out.println("(1) Uitstappen op " + stations.get(volgendStation).locatie);
+                System.out.println("(1) Uitstappen op " + stations.get(volgendStation).getLocatie());
                 System.out.println("(2) Doorreizen");
                 System.out.print("Keuze: ");
                 String keuze = scanner.nextLine();
@@ -154,18 +176,18 @@ public class Drive {
                 if (keuze.equals("1")) {
                     stationIndex = volgendStation;
                     inDeTrein = false;
-                    System.out.println("Je stapt uit op station " + stations.get(stationIndex).locatie + ".");
+                    System.out.println("Je stapt uit op station " + stations.get(stationIndex).getLocatie() + ".");
                 } else if (keuze.equals("2")) {
                     stationIndex = volgendStation;
                     int[] buren = aangrenzend[stationIndex];
                     System.out.println("Naar welk station wil je doorreizen?");
                     for (int i = 0; i < buren.length; i++) {
-                        System.out.println("(" + (i + 1) + ") " + stations.get(buren[i]).locatie);
+                        System.out.println("(" + (i + 1) + ") " + stations.get(buren[i]).getLocatie());
                     }
                     System.out.print("Keuze: ");
                     int pick = Integer.parseInt(scanner.nextLine()) - 1;
                     volgendStation = buren[pick];
-                    System.out.println("Je reist door naar " + stations.get(volgendStation).locatie + ".");
+                    System.out.println("Je reist door naar " + stations.get(volgendStation).getLocatie() + ".");
                 } else {
                     System.out.println("Ongeldige keuze, probeer opnieuw.");
                 }
